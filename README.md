@@ -1,0 +1,2 @@
+# XDAlertController
+解决iOS8以下UIAlertController无法使用的问题
