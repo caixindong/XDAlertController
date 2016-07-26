@@ -9,7 +9,7 @@
 #import "XDAlertController.h"
 #import <objc/runtime.h>
 
-#define XDiOS8Later ([[[UIDevice currentDevice] systemVersion] floatValue]>=8.0)
+#define XDiOS8Later ([[[UIDevice currentDevice] systemVersion] floatValue]<=8.0)
 
 @interface XDAlertAction ()
 
@@ -84,7 +84,11 @@
             }
                 break;
             case XDAlertControllerStyleActionSheet:{
-            
+                alertController.alertView = [[UIActionSheet alloc] initWithTitle:title
+                                                                            delegate:alertController
+                                                                   cancelButtonTitle:nil
+                                                              destructiveButtonTitle:nil
+                                                                   otherButtonTitles:nil, nil];
             }
                 break;
             default:
@@ -102,13 +106,19 @@
         
         NSInteger actionIndex = [self.alertView addButtonWithTitle:action.title];
         switch (action.style) {
-            case XDAlertActionStyleCancel:
+            case XDAlertActionStyleCancel:{
                 [self.alertView setCancelButtonIndex:actionIndex];
+            }
                 break;
-            case XDAlertActionStyleDefault:
+            case XDAlertActionStyleDefault:{
+
+            }
                 break;
-            case XDAlertActionStyleDestructive:
-                [self.alertView setDestructiveButtonIndex:actionIndex];
+            case XDAlertActionStyleDestructive:{
+                if ([self.alertView isKindOfClass:[UIActionSheet class]]) {
+                    [self.alertView setDestructiveButtonIndex:actionIndex];   
+                }
+            }
                 break;
             default:
                 break;
