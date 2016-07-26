@@ -9,7 +9,7 @@
 #import "XDAlertController.h"
 #import <objc/runtime.h>
 
-#define XDiOS8Later ([[[UIDevice currentDevice] systemVersion] floatValue]<=8.0)
+#define XDiOS8Later ([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0)
 
 @interface XDAlertAction ()
 
@@ -217,16 +217,4 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
 
